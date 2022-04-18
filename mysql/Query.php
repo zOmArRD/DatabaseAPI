@@ -20,6 +20,9 @@ abstract class Query extends AsyncTask
     public string $host, $user, $password, $database;
     public int $port;
 
+    /**
+     * The database data must be provided by the user.
+     */
     public function __construct()
     {
         $this->host = MySQL['host'];
@@ -41,7 +44,13 @@ abstract class Query extends AsyncTask
 
     abstract public function query(mysqli $mysqli): void;
 
-    /** @noinspection MethodShouldBeFinalInspection */
+    /**
+     * Note: The Database class must be created and the Database::getMySQL() method returns an instance of the MySQL
+     * class.
+     *
+     * @return void
+     * @noinspection MethodShouldBeFinalInspection
+     */
     public function onCompletion(): void
     {
         Database::getMysql()->submitAsync($this);

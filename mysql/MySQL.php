@@ -18,6 +18,17 @@ class MySQL
 {
     private array $callbacks = [];
 
+    /**
+     * Executes a query on the MySQL database.
+     *
+     * NOT ASYNC.
+     *
+     * The database data must be provided by the user.
+     *
+     * @param string $query
+     *
+     * @return void
+     */
     public function run(string $query): void
     {
         $mysqli = new mysqli(MySQL['host'], MySQL['user'], MySQL['pass'], MySQL['db'], MySQL['port']);
@@ -28,6 +39,15 @@ class MySQL
         $mysqli->close();
     }
 
+    /**
+     * Execute a query on the MySQL database asynchronously.
+     * for better performance.
+     *
+     * @param Query         $query
+     * @param callable|null $callable
+     *
+     * @return void
+     */
     public function runAsync(Query $query, ?callable $callable = null): void
     {
         $this->callbacks[spl_object_hash($query)] = $callable;
