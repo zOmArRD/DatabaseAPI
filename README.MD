@@ -1,5 +1,7 @@
 # DatabaseAPI
 
+Project Views: ![visitors](https://visitor-badge.glitch.me/badge?page_id=DatabaseAPI)
+
 A simple API to make queries asynchronously or not to MySQL
 
 ## Usage example
