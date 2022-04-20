@@ -16,7 +16,7 @@ use pocketmine\Server;
 
 class MySQL
 {
-    private static MySQL $instance;
+    private static ?MySQL $instance = null;
 
     /**
      * Loads the MySQL instance if it doesn't exist
