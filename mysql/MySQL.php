@@ -16,6 +16,17 @@ use pocketmine\Server;
 
 class MySQL
 {
+    private static MySQL $instance;
+
+    public static function getInstance(): MySQL
+    {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+
+        return self::$instance;
+    }
+
     private array $callbacks = [];
 
     /**

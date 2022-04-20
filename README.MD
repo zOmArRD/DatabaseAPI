@@ -48,7 +48,7 @@ Usage of SelectQuery on AsyncQuery
 
 ```php
 public function loadServers(): void {
-    Database::getMysql()->runAsync(new SelectQuery("SELECT * FROM servers"), function($rows): void {
+    MySQL::getInstance()->runAsync(new SelectQuery("SELECT * FROM servers"), function($rows): void {
         foreach ($rows as $row) {
             //Example function
             $server = new Server($row['name'], $row['ip'], (int)$row['port']);
@@ -60,34 +60,6 @@ public function loadServers(): void {
 ```
 
 **NOTE**: The callback function must be defined in second parameter of runAsync function.
-
----
-
-**Database class**
-
-```php
-final class Database
-{
-    private static MySQL $mysql;
-
-    public function __construct() { $this->loadProviders(); }
-
-    public function loadProviders(): void
-    {
-        $this->loadMySQL();
-    }
-
-    private function loadMySQL(): void
-    {
-        self::$mysql = new MySQL();
-    }
-
-    public static function getMysql(): MySQL
-    {
-        return self::$mysql;
-    }
-}
-```
 
 ---
 
@@ -112,7 +84,7 @@ final class InsertQuery extends Query
     }
 }
 
-Database::getMysql()->runAsync(new InsertQuery("INSERT INTO servers (name, ip, port) ' VALUES ('GhostlyMC', 'ghostlymc.live', '19132')"), function(): void {
+MySQL::getInstance()->runAsync(new InsertQuery("INSERT INTO servers (name, ip, port) ' VALUES ('GhostlyMC', 'ghostlymc.live', '19132')"), function(): void {
     Ghostly::$logger->info(sprintf("%sThe server has been inserted into the database!", PREFIX));
 });
 ```

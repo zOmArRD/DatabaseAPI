@@ -13,7 +13,6 @@ namespace zomarrd\ghostly\database\mysql;
 
 use mysqli;
 use pocketmine\scheduler\AsyncTask;
-use zomarrd\ghostly\lobby\database\Database;
 
 abstract class Query extends AsyncTask
 {
@@ -26,8 +25,8 @@ abstract class Query extends AsyncTask
     public function __construct()
     {
         $this->host = MySQL['host'];
-        $this->user =  MySQL['user'];
-        $this->password =  MySQL['pass'];
+        $this->user = MySQL['user'];
+        $this->password = MySQL['pass'];
         $this->database = MySQL['db'];
         $this->port = MySQL['port'];
     }
@@ -53,6 +52,6 @@ abstract class Query extends AsyncTask
      */
     public function onCompletion(): void
     {
-        Database::getMysql()->submitAsync($this);
+        MySQL::getInstance()->submitAsync($this);
     }
 }
