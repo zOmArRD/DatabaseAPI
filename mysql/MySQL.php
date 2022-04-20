@@ -18,6 +18,11 @@ class MySQL
 {
     private static MySQL $instance;
 
+    /**
+     * Loads the MySQL instance if it doesn't exist
+     *
+     * @return MySQL Returns the MySQL instance
+     */
     public static function getInstance(): MySQL
     {
         if (self::$instance === null) {
