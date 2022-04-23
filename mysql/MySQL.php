@@ -19,6 +19,48 @@ class MySQL
     private static ?MySQL $instance = null;
 
     /**
+     * Executes a query on the MySQL database but with prepared statements.
+     *
+     * @param string        $query
+     * @param array         $params
+     * @param callable|null $callable
+     *
+     * @return void
+     */
+    public function runPreparedStatement(string $query, array $params = [], ?callable $callable = null): void
+    {
+        $mysqli = new mysqli(MySQL['host'], MySQL['user'], MySQL['pass'], MySQL['db'], MySQL['port']);
+        if ($mysqli->connect_error) {
+            die(PREFIX . 'Could not connect to the database!');
+        }
+
+        $statement = $mysqli->prepare($query);
+        foreach ($params as $key => $value) {
+            $statement->bind_param($key, $value);
+        }
+
+        $statement->execute();
+
+        $result = $statement->get_result();
+        $rows = [];
+
+        if ($result === false) {
+            return;
+        }
+
+        while ($row = $result->fetch_assoc()) {
+            $rows[] = $row;
+        }
+
+        $statement->close();
+        $mysqli->close();
+
+        if (is_callable($callable)) {
+            $callable($rows);
+        }
+    }
+
+    /**
      * Loads the MySQL instance if it doesn't exist
      *
      * @return MySQL Returns the MySQL instance
