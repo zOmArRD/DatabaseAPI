@@ -3,10 +3,11 @@
   "description": "Ghostly Database API",
   "minimum-stability": "stable",
   "license": "MIT",
+  "version": "1.0.0",
   "authors": [
     {
-      "name": "zOmAr",
-      "email": "email@example.com"
+      "name": "zOmArRD",
+      "email": "omar@ghostlymc.live"
     }
   ],
   "require": {
