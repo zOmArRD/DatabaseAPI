@@ -1,0 +1,21 @@
+{
+  "name": "ghostlymc/database-api",
+  "description": "Ghostly Database API",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "zOmAr",
+      "email": "email@example.com"
+    }
+  ],
+  "require": {
+    "php": ">=8.0",
+    "ext-mysqli": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "ghostlymc\\database\\": "src/"
+    }
+  }
+}

@@ -9,7 +9,7 @@
  * Copyright © 2022 GhostlyMC Network (omar@ghostlymc.live) - All Rights Reserved.
  */
 
-namespace zomarrd\ghostly\database\mysql;
+namespace ghostlymc\database\mysql;
 
 use mysqli;
 use pocketmine\Server;
