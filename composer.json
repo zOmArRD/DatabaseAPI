@@ -1,8 +1,8 @@
 {
   "name": "ghostlymc/database-api",
   "description": "Ghostly Database API",
+  "type": "library",
   "license": "MIT",
-  "version": "1.0.1",
   "authors": [
     {
       "name": "zOmArRD",
@@ -10,7 +10,7 @@
     }
   ],
   "require": {
-    "php": ">=8.0",
+    "php": "^8.0",
     "ext-mysqli": "*"
   },
   "autoload": {
