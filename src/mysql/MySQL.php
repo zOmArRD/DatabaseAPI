@@ -26,6 +26,7 @@ class MySQL
      * @param callable|null $callable
      *
      * @return void
+     * @deprecated NO WORKING YET - DO NOT USE
      */
     public function runPreparedStatement(string $query, array $params = [], ?callable $callable = null): void
     {
@@ -83,18 +84,35 @@ class MySQL
      *
      * The database data must be provided by the user.
      *
-     * @param string $query
+     * @param string        $query
+     * @param callable|null $callable
      *
      * @return void
      */
-    public function run(string $query): void
+    public function run(string $query, ?callable $callable = null): void
     {
         $mysqli = new mysqli(MySQL['host'], MySQL['user'], MySQL['pass'], MySQL['db'], MySQL['port']);
         if ($mysqli->connect_error) {
             die(PREFIX . 'Could not connect to the database!');
         }
-        $mysqli->query($query);
+
+        $result = $mysqli->query($query);
         $mysqli->close();
+
+        $rows = [];
+
+        if ($result === false) {
+            return;
+        }
+
+        while ($row = $result->fetch_assoc()) {
+            $rows[] = $row;
+        }
+
+
+        if (is_callable($callable)) {
+            $callable($rows);
+        }
     }
 
     /**
