@@ -101,14 +101,13 @@ class MySQL
 
         $rows = [];
 
-        if ($result === false) {
+        if (is_bool($result)) {
             return;
         }
 
         while ($row = $result->fetch_assoc()) {
             $rows[] = $row;
         }
-
 
         if (is_callable($callable)) {
             $callable($rows);
