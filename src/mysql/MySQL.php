@@ -9,7 +9,7 @@
  * Copyright © 2022 GhostlyMC Network (omar@ghostlymc.live) - All Rights Reserved.
  */
 
-namespace ghostlymc\database\mysql;
+namespace GhostlyMC\DatabaseAPI\mysql;
 
 use mysqli;
 use pocketmine\Server;
@@ -27,6 +27,8 @@ class MySQL
      *
      * @return void
      * @deprecated NO WORKING YET - DO NOT USE
+     *
+     * @todo       Fix this - Search a better way to do this
      */
     public function runPreparedStatement(string $query, array $params = [], ?callable $callable = null): void
     {

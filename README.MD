@@ -95,3 +95,15 @@ This project is under development and is not ready to be used.
 any bugs, issues, etc. please report to me on GitHub.
 
 Exclusive use for GhostlyMC.
+
+## NOTE
+
+There are undefined behavior in this project.
+
+**Example:**
+
+- Constants are not defined.
+- Undefined behavior in the code.
+- Undefined behavior in the database.
+
+Feel free to report any bugs, problems, etc. to me on GitHub.

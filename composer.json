@@ -1,6 +1,6 @@
 {
   "name": "ghostlymc/database-api",
-  "description": "Ghostly Database API",
+  "description": "GhostlyMC DatabaseAPI for Software",
   "type": "library",
   "license": "MIT",
   "authors": [
@@ -13,9 +13,12 @@
     "php": "^8.0",
     "ext-mysqli": "*"
   },
+  "require-dev": {
+    "pocketmine/pocketmine-mp": ">=4.3.1"
+  },
   "autoload": {
     "psr-4": {
-      "ghostlymc\\database\\": "src/"
+      "GhostlyMC\\DatabaseAPI\\": "src/"
     }
   }
 }
