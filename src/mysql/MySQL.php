@@ -101,7 +101,7 @@ class MySQL
      *
      * @return void
      */
-    public function run(string $query, ?callable $callable = null): void
+    public static function run(string $query, ?callable $callable = null): void
     {
         $mysqli = new mysqli(MySQL['host'], MySQL['user'], MySQL['pass'], MySQL['db']);
         if ($mysqli->connect_error) {
