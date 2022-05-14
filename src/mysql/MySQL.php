@@ -21,7 +21,33 @@ class MySQL
      *
      * @param string        $query
      * @param callable|null $callable
-     * @param               $types
+     * @param string        $types <p>
+     *                             A string that contains one or more characters which specify the types
+     *                             for the corresponding bind variables:
+     *                             <table>
+     *                             Type specification chars
+     *                             <tr valign="top">
+     *                             <td>Character</td>
+     *                             <td>Description</td>
+     *                             </tr>
+     *                             <tr valign="top">
+     *                             <td>i</td>
+     *                             <td>corresponding variable has type integer</td>
+     *                             </tr>
+     *                             <tr valign="top">
+     *                             <td>d</td>
+     *                             <td>corresponding variable has type double</td>
+     *                             </tr>
+     *                             <tr valign="top">
+     *                             <td>s</td>
+     *                             <td>corresponding variable has type string</td>
+     *                             </tr>
+     *                             <tr valign="top">
+     *                             <td>b</td>
+     *                             <td>corresponding variable is a blob and will be sent in packets</td>
+     *                             </tr>
+     *                             </table>
+     *                             </p>
      * @param               $var1
      * @param mixed         ...$_
      *
