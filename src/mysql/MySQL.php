@@ -16,8 +16,6 @@ use pocketmine\Server;
 
 class MySQL
 {
-    private static ?MySQL $instance = null;
-
     /**
      * Executes a query on the MySQL database but with prepared statements.
      *
@@ -63,21 +61,7 @@ class MySQL
         }
     }
 
-    /**
-     * Loads the MySQL instance if it doesn't exist
-     *
-     * @return MySQL Returns the MySQL instance
-     */
-    public static function getInstance(): MySQL
-    {
-        if (self::$instance === null) {
-            self::$instance = new self();
-        }
-
-        return self::$instance;
-    }
-
-    private array $callbacks = [];
+    private static array $callbacks = [];
 
     /**
      * Executes a query on the MySQL database.
@@ -128,15 +112,22 @@ class MySQL
      *
      * @return void
      */
-    public function runAsync(Query $query, ?callable $callable = null): void
+    public static function runAsync(Query $query, ?callable $callable = null): void
     {
-        $this->callbacks[spl_object_hash($query)] = $callable;
+        self::$callbacks[spl_object_hash($query)] = $callable;
         Server::getInstance()->getAsyncPool()->submitTask($query);
     }
 
-    public function submitAsync(Query $query): void
+    /**
+     * Run the callable when the query is finished.
+     *
+     * @param Query $query
+     *
+     * @return void
+     */
+    public static function submitAsync(Query $query): void
     {
-        $callable = $this->callbacks[spl_object_hash($query)] ?? null;
+        $callable = self::$callbacks[spl_object_hash($query)] ?? null;
 
         if (is_callable($callable)) {
             if (isset($query['rows'])) {

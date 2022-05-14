@@ -52,6 +52,6 @@ abstract class Query extends AsyncTask
      */
     public function onCompletion(): void
     {
-        MySQL::getInstance()->submitAsync($this);
+        MySQL::submitAsync($this);
     }
 }
