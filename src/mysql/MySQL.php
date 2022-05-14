@@ -93,7 +93,7 @@ class MySQL
      */
     public function run(string $query, ?callable $callable = null): void
     {
-        $mysqli = new mysqli(MySQL['host'], MySQL['user'], MySQL['pass'], MySQL['db'], MySQL['port']);
+        $mysqli = new mysqli(MySQL['host'], MySQL['user'], MySQL['pass'], MySQL['db']);
         if ($mysqli->connect_error) {
             die(PREFIX . 'Could not connect to the database!');
         }
@@ -104,6 +104,9 @@ class MySQL
         $rows = [];
 
         if (is_bool($result)) {
+            if (is_callable($callable)) {
+                $callable();
+            }
             return;
         }
 
