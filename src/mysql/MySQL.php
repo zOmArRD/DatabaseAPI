@@ -22,15 +22,14 @@ class MySQL
      * Executes a query on the MySQL database but with prepared statements.
      *
      * @param string        $query
-     * @param array         $params
      * @param callable|null $callable
+     * @param               $types
+     * @param               $var1
+     * @param mixed         ...$_
      *
      * @return void
-     * @deprecated NO WORKING YET - DO NOT USE
-     *
-     * @todo       Fix this - Search a better way to do this
      */
-    public function runPreparedStatement(string $query, array $params = [], ?callable $callable = null): void
+    public static function runPreparedStatement(string $query, ?callable $callable, $types, &$var1, &...$_): void
     {
         $mysqli = new mysqli(MySQL['host'], MySQL['user'], MySQL['pass'], MySQL['db'], MySQL['port']);
         if ($mysqli->connect_error) {
@@ -38,16 +37,17 @@ class MySQL
         }
 
         $statement = $mysqli->prepare($query);
-        foreach ($params as $key => $value) {
-            $statement->bind_param($key, $value);
-        }
+        $statement->bind_param($types, $var1, ...$_);
 
         $statement->execute();
 
         $result = $statement->get_result();
         $rows = [];
 
-        if ($result === false) {
+        if (is_bool($result)) {
+            if (is_callable($callable)) {
+                $callable();
+            }
             return;
         }
 
