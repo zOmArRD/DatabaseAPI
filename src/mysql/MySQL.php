@@ -139,7 +139,11 @@ class MySQL
         $callable = $this->callbacks[spl_object_hash($query)] ?? null;
 
         if (is_callable($callable)) {
-            $callable($query['rows']);
+            if (isset($query['rows'])) {
+                $callable($query['rows']);
+            } else {
+                $callable();
+            }
         }
     }
 }
